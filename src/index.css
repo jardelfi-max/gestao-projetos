@@ -245,9 +245,6 @@ body {
 }
 
 /* ---------- Forms ---------- */
-.form-card {
-  margin-bottom: 20px;
-}
 
 .form-grid {
   display: grid;
@@ -498,10 +495,6 @@ body {
   height: 38px;
 }
 
-.form-card + .form-card {
-  margin-top: 16px;
-}
-
 /* Selo de status */
 .badge {
   display: inline-block;
@@ -530,4 +523,97 @@ body {
 .badge-azul {
   background: #dbeafe;
   color: #1e40af;
+}
+
+/* ---------- Dashboard ---------- */
+.filtros {
+  margin-bottom: 20px;
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.filtros-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.funil {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.funil-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.funil-label {
+  font-size: 13px;
+  color: var(--text);
+  text-align: right;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.funil-bar-wrap {
+  flex: 1;
+  min-width: 60px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 22px;
+}
+
+.funil-valor {
+  flex-shrink: 0;
+}
+
+.funil-bar {
+  height: 100%;
+  border-radius: 6px;
+  min-width: 4px;
+  transition: width 0.3s ease;
+}
+
+.funil-valor {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.bar-verde {
+  background: #22c55e;
+}
+.bar-vermelho {
+  background: #ef4444;
+}
+.bar-amarelo {
+  background: #eab308;
+}
+.bar-azul {
+  background: #3b82f6;
+}
+
+.card + .card {
+  margin-top: 20px;
+}
+
+@media print {
+  .sidebar,
+  .filtros-actions,
+  .page-header .btn-primary {
+    display: none !important;
+  }
+  .content {
+    padding: 0;
+  }
 }

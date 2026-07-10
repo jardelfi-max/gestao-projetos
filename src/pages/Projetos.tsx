@@ -23,6 +23,9 @@ type Projeto = {
   descricaoEscopo: string
   justificativa: string
   retornoEsperado: string
+  valorOrcado: string
+  valorRealizado: string
+  percentualExecucao: string
   envolvidos: Envolvido[]
 }
 
@@ -45,6 +48,9 @@ const formVazio: FormProjeto = {
   descricaoEscopo: '',
   justificativa: '',
   retornoEsperado: '',
+  valorOrcado: '',
+  valorRealizado: '',
+  percentualExecucao: '',
   envolvidos: [],
 }
 
@@ -371,6 +377,49 @@ export default function Projetos() {
                 rows={2}
                 value={form.retornoEsperado}
                 onChange={(e) => set('retornoEsperado', e.target.value)}
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="card form-card">
+          <h2 className="card-title">Resumo financeiro (provisório)</h2>
+          <p className="muted">
+            Valores usados no Dashboard até construirmos os grids detalhados de Previsto/Realizado.
+          </p>
+          <div className="form-grid">
+            <label className="field">
+              <span>Valor Orçado (R$)</span>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={form.valorOrcado}
+                onChange={(e) => set('valorOrcado', e.target.value)}
+                placeholder="0,00"
+              />
+            </label>
+            <label className="field">
+              <span>Valor Realizado (R$)</span>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={form.valorRealizado}
+                onChange={(e) => set('valorRealizado', e.target.value)}
+                placeholder="0,00"
+              />
+            </label>
+            <label className="field">
+              <span>% de Execução</span>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                value={form.percentualExecucao}
+                onChange={(e) => set('percentualExecucao', e.target.value)}
+                placeholder="0"
               />
             </label>
           </div>
