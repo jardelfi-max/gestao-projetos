@@ -267,7 +267,8 @@ body {
   color: var(--text-muted);
 }
 
-.field input {
+.field input,
+.field select {
   padding: 9px 11px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -275,9 +276,11 @@ body {
   font-family: inherit;
   color: var(--text);
   background: #fff;
+  height: 38px;
 }
 
-.field input:focus {
+.field input:focus,
+.field select:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);

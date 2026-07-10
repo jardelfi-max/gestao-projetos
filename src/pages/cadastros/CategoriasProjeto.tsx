@@ -1,15 +1,27 @@
-import PageHeader from '../../components/PageHeader'
-import EmptyState from '../../components/EmptyState'
+import CadastroCrud, { type Campo } from '../../components/CadastroCrud'
+
+const campos: Campo[] = [
+  { name: 'descricao', label: 'Descrição', required: true, placeholder: 'Ex.: Obras Civis' },
+  {
+    name: 'centroId',
+    label: 'Centro de Responsabilidade',
+    required: true,
+    select: {
+      optionsKey: 'gp.centros',
+      getLabel: (o) => `${o.codigo} — ${o.descricao}`,
+    },
+  },
+]
 
 export default function CategoriasProjeto() {
   return (
-    <div className="page">
-      <PageHeader
-        title="Categorias de Projeto"
-        subtitle="Cadastro padronizado: ID, descrição e centro de responsabilidade associado"
-        action="+ Nova categoria"
-      />
-      <EmptyState icon="◆" message="Nenhuma categoria de projeto cadastrada ainda." />
-    </div>
+    <CadastroCrud
+      title="Categorias de Projeto"
+      subtitle="Cadastro padronizado: descrição e centro de responsabilidade associado"
+      storageKey="gp.categorias"
+      campos={campos}
+      emptyIcon="◆"
+      addLabel="+ Adicionar categoria"
+    />
   )
 }

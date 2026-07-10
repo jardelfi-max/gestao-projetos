@@ -1,15 +1,18 @@
-import PageHeader from '../../components/PageHeader'
-import EmptyState from '../../components/EmptyState'
+import CadastroCrud, { type Campo } from '../../components/CadastroCrud'
+
+const campos: Campo[] = [
+  { name: 'descricao', label: 'Descrição', required: true, placeholder: 'Ex.: Infraestrutura' },
+]
 
 export default function TiposProjeto() {
   return (
-    <div className="page">
-      <PageHeader
-        title="Tipos de Projeto"
-        subtitle="Cadastro de tipos de projeto"
-        action="+ Novo tipo"
-      />
-      <EmptyState icon="◇" message="Nenhum tipo de projeto cadastrado ainda." />
-    </div>
+    <CadastroCrud
+      title="Tipos de Projeto"
+      subtitle="Cadastro de tipos de projeto"
+      storageKey="gp.tipos"
+      campos={campos}
+      emptyIcon="◇"
+      addLabel="+ Adicionar tipo"
+    />
   )
 }

@@ -1,18 +1,19 @@
-import PageHeader from '../../components/PageHeader'
-import EmptyState from '../../components/EmptyState'
+import CadastroCrud, { type Campo } from '../../components/CadastroCrud'
+
+const campos: Campo[] = [
+  { name: 'codigo', label: 'Código', required: true, placeholder: 'Ex.: CR-001' },
+  { name: 'descricao', label: 'Descrição', required: true, placeholder: 'Ex.: Operações Portuárias' },
+]
 
 export default function CentrosResponsabilidade() {
   return (
-    <div className="page">
-      <PageHeader
-        title="Centros de Responsabilidade"
-        subtitle="Cadastro de centros de custo / responsabilidade"
-        action="+ Novo centro"
-      />
-      <EmptyState
-        icon="◈"
-        message="Nenhum centro de responsabilidade cadastrado ainda."
-      />
-    </div>
+    <CadastroCrud
+      title="Centros de Responsabilidade"
+      subtitle="Cadastro de centros de custo / responsabilidade"
+      storageKey="gp.centros"
+      campos={campos}
+      emptyIcon="◈"
+      addLabel="+ Adicionar centro"
+    />
   )
 }
