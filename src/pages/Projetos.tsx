@@ -4,6 +4,7 @@ import EmptyState from '../components/EmptyState'
 import AbaPrevisto from '../components/AbaPrevisto'
 import AbaRealizado from '../components/AbaRealizado'
 import AbaResumo from '../components/AbaResumo'
+import AbaTransferencias from '../components/AbaTransferencias'
 import { readList } from '../lib/storage'
 import { useLocalStorageList } from '../lib/useLocalStorageList'
 import { STATUS, PRIORIDADES, PAPEIS, MOTIVOS, corStatus } from '../lib/projetoOpcoes'
@@ -14,6 +15,7 @@ import {
   type PrevistoLinha,
   type RealizadoLinha,
 } from '../lib/financeiro'
+import { type Transferencia } from '../lib/transferencias'
 
 type Envolvido = { pessoaId: string; papel: string }
 
@@ -38,6 +40,7 @@ type Projeto = {
   valorRealizado: string
   previsto: PrevistoLinha[]
   realizado: RealizadoLinha[]
+  transferencias: Transferencia[]
   envolvidos: Envolvido[]
 }
 
@@ -65,6 +68,7 @@ const formVazio: FormProjeto = {
   valorRealizado: '',
   previsto: [],
   realizado: [],
+  transferencias: [],
   envolvidos: [],
 }
 
@@ -74,6 +78,7 @@ const ABAS = [
   { id: 'previsto', label: 'Valor Previsto' },
   { id: 'realizado', label: 'Valor Realizado' },
   { id: 'resumo', label: 'Resumo Financeiro' },
+  { id: 'transferencias', label: 'Transferências' },
 ] as const
 
 type AbaId = (typeof ABAS)[number]['id']
@@ -121,6 +126,8 @@ export default function Projetos() {
     setForm((f) => ({ ...f, previsto: fn(f.previsto) }))
   const setRealizado = (fn: (l: RealizadoLinha[]) => RealizadoLinha[]) =>
     setForm((f) => ({ ...f, realizado: fn(f.realizado) }))
+  const setTransferencias = (fn: (t: Transferencia[]) => Transferencia[]) =>
+    setForm((f) => ({ ...f, transferencias: fn(f.transferencias) }))
 
   function toggleMotivo(motivo: string) {
     setForm((f) => ({
@@ -528,6 +535,18 @@ export default function Projetos() {
           <div className="card form-card">
             <h2 className="card-title">Resumo Financeiro</h2>
             <AbaResumo previsto={form.previsto} realizado={form.realizado} />
+          </div>
+        )}
+
+        {aba === 'transferencias' && (
+          <div className="card form-card">
+            <h2 className="card-title">Transferências de verba</h2>
+            <AbaTransferencias
+              previsto={form.previsto}
+              realizado={form.realizado}
+              transferencias={form.transferencias}
+              setTransferencias={setTransferencias}
+            />
           </div>
         )}
 

@@ -728,3 +728,90 @@ body {
   color: #991b1b;
   font-weight: 600;
 }
+
+/* ---------- Transferências ---------- */
+.seta {
+  color: var(--text-muted);
+  font-size: 18px;
+  padding: 0 2px;
+}
+
+.just-input {
+  margin-top: 8px;
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.just-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.transf-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.transf-item {
+  padding: 14px 16px;
+  background: #f8fafc;
+}
+
+.transf-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.transf-valor {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.step {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: var(--text-muted);
+}
+
+.step-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.step-now {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.transf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.transf-actions .btn-primary,
+.transf-actions .btn-secondary {
+  padding: 7px 12px;
+  font-size: 13px;
+}
