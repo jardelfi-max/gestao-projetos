@@ -5,6 +5,7 @@ import AbaPrevisto from '../components/AbaPrevisto'
 import AbaRealizado from '../components/AbaRealizado'
 import AbaResumo from '../components/AbaResumo'
 import AbaTransferencias from '../components/AbaTransferencias'
+import AbaGantt from '../components/AbaGantt'
 import { readList } from '../lib/storage'
 import { useLocalStorageList } from '../lib/useLocalStorageList'
 import { STATUS, PRIORIDADES, PAPEIS, MOTIVOS, corStatus } from '../lib/projetoOpcoes'
@@ -16,6 +17,7 @@ import {
   type RealizadoLinha,
 } from '../lib/financeiro'
 import { type Transferencia } from '../lib/transferencias'
+import { type Tarefa } from '../lib/gantt'
 
 type Envolvido = { pessoaId: string; papel: string }
 
@@ -41,6 +43,7 @@ type Projeto = {
   previsto: PrevistoLinha[]
   realizado: RealizadoLinha[]
   transferencias: Transferencia[]
+  tarefas: Tarefa[]
   envolvidos: Envolvido[]
 }
 
@@ -69,6 +72,7 @@ const formVazio: FormProjeto = {
   previsto: [],
   realizado: [],
   transferencias: [],
+  tarefas: [],
   envolvidos: [],
 }
 
@@ -79,6 +83,7 @@ const ABAS = [
   { id: 'realizado', label: 'Valor Realizado' },
   { id: 'resumo', label: 'Resumo Financeiro' },
   { id: 'transferencias', label: 'Transferências' },
+  { id: 'gantt', label: 'Gantt' },
 ] as const
 
 type AbaId = (typeof ABAS)[number]['id']
@@ -128,6 +133,8 @@ export default function Projetos() {
     setForm((f) => ({ ...f, realizado: fn(f.realizado) }))
   const setTransferencias = (fn: (t: Transferencia[]) => Transferencia[]) =>
     setForm((f) => ({ ...f, transferencias: fn(f.transferencias) }))
+  const setTarefas = (fn: (t: Tarefa[]) => Tarefa[]) =>
+    setForm((f) => ({ ...f, tarefas: fn(f.tarefas) }))
 
   function toggleMotivo(motivo: string) {
     setForm((f) => ({
@@ -547,6 +554,13 @@ export default function Projetos() {
               transferencias={form.transferencias}
               setTransferencias={setTransferencias}
             />
+          </div>
+        )}
+
+        {aba === 'gantt' && (
+          <div className="card form-card">
+            <h2 className="card-title">Cronograma (Gantt)</h2>
+            <AbaGantt tarefas={form.tarefas} setTarefas={setTarefas} envolvidos={form.envolvidos} />
           </div>
         )}
 
