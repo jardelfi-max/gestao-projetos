@@ -5,8 +5,20 @@ import Pessoas from './pages/cadastros/Pessoas'
 import CentrosResponsabilidade from './pages/cadastros/CentrosResponsabilidade'
 import TiposProjeto from './pages/cadastros/TiposProjeto'
 import CategoriasProjeto from './pages/cadastros/CategoriasProjeto'
+import Login from './pages/Login'
+import { useAuth } from './context/AuthProvider'
+import { supabase } from './lib/supabase'
 
 function App() {
+  const { session, loading } = useAuth()
+
+  if (loading) {
+    return <div className="loading-screen">Carregando…</div>
+  }
+  if (!session) {
+    return <Login />
+  }
+
   return (
     <div className="app">
       <aside className="sidebar">
@@ -38,7 +50,15 @@ function App() {
           </NavLink>
         </nav>
 
-        <div className="sidebar-footer">v0.1 · em construção</div>
+        <div className="sidebar-footer">
+          <div className="user-email" title={session.user.email ?? ''}>
+            {session.user.email}
+          </div>
+          <button type="button" className="logout-btn" onClick={() => supabase.auth.signOut()}>
+            Sair
+          </button>
+          <div className="versao">v0.2 · Supabase</div>
+        </div>
       </aside>
 
       <main className="content">
