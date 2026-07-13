@@ -7,7 +7,7 @@ import AbaResumo from '../components/AbaResumo'
 import AbaTransferencias from '../components/AbaTransferencias'
 import AbaGantt from '../components/AbaGantt'
 import { readList } from '../lib/storage'
-import { useLocalStorageList } from '../lib/useLocalStorageList'
+import { useCadastro } from '../lib/useCadastro'
 import { STATUS, PRIORIDADES, PAPEIS, MOTIVOS, corStatus } from '../lib/projetoOpcoes'
 import {
   totalPrevisto,
@@ -98,7 +98,8 @@ function labelPessoa(id: string): string {
 }
 
 export default function Projetos() {
-  const [projetos, setProjetos] = useLocalStorageList<Projeto>(STORAGE_KEY)
+  const { items, loading, adicionar, atualizar, excluir: excluirDb } = useCadastro('projetos', STORAGE_KEY)
+  const projetos = items as Projeto[]
   const [modo, setModo] = useState<'lista' | 'form'>('lista')
   const [editId, setEditId] = useState<number | null>(null)
   const [form, setForm] = useState<FormProjeto>(formVazio)
@@ -174,11 +175,11 @@ export default function Projetos() {
     setModo('form')
   }
 
-  function excluir(id: number) {
-    setProjetos((lista) => lista.filter((p) => p.id !== id))
+  async function excluir(id: number) {
+    await excluirDb(id)
   }
 
-  function salvar(e: React.FormEvent) {
+  async function salvar(e: React.FormEvent) {
     e.preventDefault()
     if (!form.codigoErp.trim()) {
       setErro('O "Código do Projeto ERP" é obrigatório.')
@@ -197,10 +198,9 @@ export default function Projetos() {
       valorRealizado: String(totalRealizado(form.realizado)),
     }
     if (editId !== null) {
-      setProjetos((lista) => lista.map((p) => (p.id === editId ? { id: editId, ...finalizado } : p)))
+      await atualizar(editId, finalizado)
     } else {
-      const proximoId = projetos.reduce((m, p) => Math.max(m, p.id), 0) + 1
-      setProjetos((lista) => [...lista, { id: proximoId, ...finalizado }])
+      await adicionar(finalizado)
     }
     setModo('lista')
   }
@@ -222,7 +222,11 @@ export default function Projetos() {
           </button>
         </div>
 
-        {projetos.length === 0 ? (
+        {loading ? (
+          <div className="card empty-state">
+            <p className="muted">Carregando projetos do banco…</p>
+          </div>
+        ) : projetos.length === 0 ? (
           <EmptyState
             icon="📋"
             message="Nenhum projeto cadastrado ainda."

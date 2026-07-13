@@ -6,6 +6,7 @@ export const TABELAS_CADASTRO = [
   { table: 'centros', key: 'gp.centros' },
   { table: 'tipos', key: 'gp.tipos' },
   { table: 'categorias', key: 'gp.categorias' },
+  { table: 'projetos', key: 'gp.projetos' },
 ]
 
 // Puxa todos os cadastros do banco para o cache local (chamado após o login).
