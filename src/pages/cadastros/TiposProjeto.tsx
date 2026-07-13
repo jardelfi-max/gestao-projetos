@@ -9,6 +9,7 @@ export default function TiposProjeto() {
     <CadastroCrud
       title="Tipos de Projeto"
       subtitle="Cadastro de tipos de projeto"
+      table="tipos"
       storageKey="gp.tipos"
       campos={campos}
       emptyIcon="◇"

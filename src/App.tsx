@@ -8,9 +8,15 @@ import CategoriasProjeto from './pages/cadastros/CategoriasProjeto'
 import Login from './pages/Login'
 import { useAuth } from './context/AuthProvider'
 import { supabase } from './lib/supabase'
+import { syncCadastros } from './lib/cadastroSync'
+import { useEffect } from 'react'
 
 function App() {
   const { session, loading } = useAuth()
+
+  useEffect(() => {
+    if (session) syncCadastros()
+  }, [session])
 
   if (loading) {
     return <div className="loading-screen">Carregando…</div>

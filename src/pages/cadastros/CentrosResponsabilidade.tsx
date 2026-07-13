@@ -10,6 +10,7 @@ export default function CentrosResponsabilidade() {
     <CadastroCrud
       title="Centros de Responsabilidade"
       subtitle="Cadastro de centros de custo / responsabilidade"
+      table="centros"
       storageKey="gp.centros"
       campos={campos}
       emptyIcon="◈"

@@ -13,6 +13,7 @@ export default function Pessoas() {
     <CadastroCrud
       title="Pessoas"
       subtitle="Cadastro de usuários: nome, CPF, e-mail, telefone e departamento"
+      table="pessoas"
       storageKey="gp.pessoas"
       campos={campos}
       emptyIcon="◍"

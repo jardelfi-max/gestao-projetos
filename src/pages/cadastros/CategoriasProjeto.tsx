@@ -18,6 +18,7 @@ export default function CategoriasProjeto() {
     <CadastroCrud
       title="Categorias de Projeto"
       subtitle="Cadastro padronizado: descrição e centro de responsabilidade associado"
+      table="categorias"
       storageKey="gp.categorias"
       campos={campos}
       emptyIcon="◆"
